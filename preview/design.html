@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>愛紗·暗夜城 — 18+ 重新設計</title>
+<style>
+  body{background:#17171e;color:#ddd;font-family:system-ui,sans-serif;margin:0;padding:16px;line-height:1.7}
+  h1{font-size:20px;color:#f5c866}
+  h2{font-size:16px;color:#9ad;margin-top:26px;border-left:3px solid #9ad;padding-left:8px}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0}
+  th,td{border:1px solid #333;padding:6px;text-align:left}
+  th{background:#22222c;color:#f5c866}
+  code,pre{background:#22222c;border-radius:5px;padding:2px 6px;font-size:12px}
+  pre{padding:10px;overflow-x:auto}
+  .hl{color:#ff9d9d;font-weight:bold}
+  .ask{background:#2a2233;border:1px solid #7755aa;border-radius:8px;padding:12px;margin:16px 0}
+  li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>愛紗·暗夜城 — 18+ 重新設計(劍星路線)</h1>
+<p>紅線:性感/挑逗到頂,<span class="hl">三點不露、無性行為</span>;首頁年齡確認;素材全 AI 自產。</p>
+
+<h2>定位一句話</h2>
+<p><b>「性感角色驅動的 2D 哥德惡魔城」</b>——玩家為了「看到愛紗更多樣子」而玩:服裝收集、戰損演出、魔王立繪圖鑑是核心獎勵,動作玩法是取得獎勵的手段。</p>
+
+<h2>劍星的成功要素 → 移植</h2>
+<table>
+<tr><th>劍星</th><th>本作移植</th></tr>
+<tr><td>主角=第一賣點</td><td>愛紗御姐立繪強化 cut-in/待機/勝利展示</td></tr>
+<tr><td><b>服裝收集 80+ 套</b></td><td><b>服裝系統=重設計核心</b>,魔王/寶箱/成就掉服裝,每套有屬性 trade-off</td></tr>
+<tr><td>戰損</td><td>受擊累積→立繪 完好/破損/大破 三階,大破攻擊+15%(風險獎勵)</td></tr>
+<tr><td>戰鬥爽快</td><td>完美閃避子彈時間+魔王處決 cut-in 特寫</td></tr>
+<tr><td>展示性</td><td>Gallery 圖鑑(服裝/女魔王立繪)+勝利姿勢</td></tr>
+</table>
+<p><b>關鍵洞見:</b>性感的載體是「立繪/cut-in」,不是遊戲內 155px 小人。立繪換裝一張 6 分鐘、小人全動作換裝一套數小時 → 服裝先做立繪級(更衣室/HUD/cut-in/戰損全用立繪),小人 sprite 換裝壓最後只做精選 2-3 套。</p>
+
+<h2>新遊戲循環(治乏味)</h2>
+<pre>探索 → 打魔王/寶箱/成就 → 掉服裝 → 更衣室換裝(屬性+外觀)
+→ 圖鑑收集慾 → 挑戰更難(戰損風險 vs 大破 buff)→ 下一區</pre>
+<ul>
+<li><b>性感女魔王陣容</b>(魔王也是收集品):吸血鬼女王 / 魅魔劍士 / 暗黑聖女——擊敗解鎖立繪進圖鑑;現有龍/騎士/獄卒降為中程小王</li>
+<li><b>完美閃避</b>:受擊前 0.15s 閃避 → 0.8s 子彈時間+反擊窗口</li>
+<li><b>處決</b>:魔王 HP&lt;10% 致命一擊 → 全螢幕愛紗處決 cut-in</li>
+</ul>
+
+<h2>工程架構</h2>
+<ul>
+<li>main.gd 2576 行巨石 → 切模組:outfit_system / gallery / closet / cutin + data/outfits.json 資料驅動</li>
+<li>存檔加:owned_outfits / equipped / outfit_damage / gallery_unlocked</li>
+<li>美術全用已驗證管線:Kontext 換裝(立繪+戰損階)、gen-kx-anim(動畫)、QC 閘門</li>
+</ul>
+
+<h2>分期(每期可部署,手機驗收)</h2>
+<table>
+<tr><th>期</th><th>內容</th><th>估</th></tr>
+<tr><td>P0</td><td>age gate + 18+ 主視覺標題頁 + main.gd 模組化</td><td>1天</td></tr>
+<tr><td>P1</td><td>服裝系統 MVP:更衣室+3套服裝立繪+屬性+解鎖</td><td>2天</td></tr>
+<tr><td>P2</td><td>戰損三階+大破 buff+休息點修復</td><td>1-2天</td></tr>
+<tr><td>P3</td><td>女魔王×2+Gallery 圖鑑</td><td>2-3天</td></tr>
+<tr><td>P4</td><td>完美閃避+處決 cut-in</td><td>2天</td></tr>
+<tr><td>P5</td><td>精選服裝的遊戲內 sprite 換裝</td><td>每套半天</td></tr>
+<tr><td>P6</td><td>照片模式/NPC好感/服裝擴到12+套</td><td>滾動</td></tr>
+</table>
+
+<div class="ask">
+<b>待你拍板的三題:</b><br>
+1. 服裝系統當核心進度——同意就 P0→P1 開工?<br>
+2. 戰損(三階破損+大破 buff)要不要?<br>
+3. 女魔王人設:吸血鬼女王/魅魔劍士/暗黑聖女 這組 OK?
+</div>
+</body>
+</html>
