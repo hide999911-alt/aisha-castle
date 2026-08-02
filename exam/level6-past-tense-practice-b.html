@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Homework Level 6 Lesson 1 — Practice B</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8e8e8; }
+  body {
+    font-family: 'Comic Sans MS', 'Comic Neue', 'Segoe Print', 'DejaVu Sans',
+                 'WenQuanYi Zen Hei', sans-serif;
+    color: #111;
+    font-size: 13.5pt;
+    line-height: 1.35;
+  }
+  @page { size: A4; margin: 0; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    padding: 13mm 15mm 12mm 15mm;
+    margin: 0 auto 8mm auto;
+    background: #fff;
+    page-break-after: always;
+  }
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen {
+    .page { box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+  }
+
+  /* ---------- header ---------- */
+  .hdr { display: flex; align-items: flex-start; gap: 6mm; }
+  .hdr .logo { flex: 0 0 auto; }
+  .hdr .who { flex: 1 1 auto; }
+  .whorow { display: flex; align-items: flex-end; gap: 3mm; margin-bottom: 4.5mm; }
+  .whorow .lbl { font-weight: bold; white-space: nowrap; }
+  .fill-line { flex: 1 1 auto; border-bottom: 0.5mm dashed #666; height: 7mm; }
+  .scorebox {
+    flex: 0 0 auto; width: 34mm; height: 20mm;
+    border: 0.7mm solid #000; border-radius: 3mm;
+  }
+  .title { text-align: center; font-weight: bold; font-size: 16pt; margin: 3mm 0 1mm 0; }
+  .subtitle { text-align: center; font-size: 12pt; margin-bottom: 4mm; }
+
+  /* ---------- sections ---------- */
+  .sec { margin-top: 4.5mm; }
+  .seclbl { font-weight: bold; }
+  .inst { font-weight: bold; }
+
+  /* time words table */
+  table.tw { border-collapse: collapse; margin: 2.5mm auto 0 auto; width: 92%; }
+  table.tw td { border: 0.45mm solid #000; padding: 1.6mm 3mm; }
+  table.tw td.k { width: 18mm; font-weight: bold; text-align: center; }
+  .twcap { text-align: center; font-weight: bold; margin-top: 2.5mm; }
+
+  /* example box */
+  .exbox {
+    border: 1.1mm double #000; outline: 0.45mm solid #000; outline-offset: -2.2mm;
+    padding: 4mm 5mm 3.5mm 5mm; margin-top: 3mm;
+  }
+  .exbox .extitle { font-weight: bold; }
+  .exgrid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; row-gap: 2.5mm; margin-top: 1.5mm; font-size: 12pt; }
+  .exgrid .ans { padding-left: 6.5mm; }
+  u { text-decoration-thickness: 0.5mm; text-underline-offset: 1mm; }
+
+  /* vocabulary table */
+  table.voc { border-collapse: collapse; margin: 2.5mm auto 0 auto; width: 100%; }
+  table.voc td { border: 0.45mm solid #000; padding: 1.8mm 2mm; text-align: center; width: 20%; }
+
+  /* questions + writing guides */
+  .q { margin-top: 4mm; }
+  .q .qt { display: flex; gap: 2.5mm; font-weight: bold; }
+  .q .qn { flex: 0 0 auto; }
+  .wl {
+    position: relative; height: 12.5mm; margin-top: 2.8mm;
+    border-top: 0.5mm solid #333; border-bottom: 0.5mm solid #333;
+  }
+  .wl::before {
+    content: ""; position: absolute; top: 50%; left: 0; right: 0;
+    border-top: 0.4mm dashed #9a9a9a;
+  }
+  .choice { letter-spacing: 0.2mm; }
+  .blank { display: inline-block; width: 17mm; border-bottom: 0.5mm solid #333; height: 4.5mm; }
+
+  /* answer key */
+  .key h2 { text-align: center; font-size: 15pt; margin-bottom: 1mm; }
+  .keynote { text-align: center; font-size: 10.5pt; color: #333; margin-bottom: 4mm; }
+  .key ol { margin-left: 8mm; }
+  .key li { margin-top: 2.2mm; }
+  .vary { color: #555; font-size: 10.5pt; }
+  .keysec { font-weight: bold; margin-top: 4mm; }
+  .keybox { border: 0.45mm solid #000; border-radius: 2mm; padding: 3mm 4mm; margin-top: 3mm; font-size: 11pt; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="hdr">
+    <div class="logo">
+      <svg width="64" height="72" viewBox="0 0 64 72" aria-hidden="true">
+        <path d="M32 2 L60 10 V38 C60 54 47 66 32 70 C17 66 4 54 4 38 V10 Z"
+              fill="none" stroke="#000" stroke-width="3"/>
+        <path d="M32 14 l5.2 10.6 11.7 1.7 -8.5 8.2 2 11.6 L32 40.6 21.6 46.1 l2 -11.6 -8.5 -8.2 11.7 -1.7 Z"
+              fill="#000"/>
+        <text x="32" y="62" text-anchor="middle" font-size="9" font-weight="bold" font-family="inherit">ENGLISH</text>
+      </svg>
+    </div>
+    <div class="who">
+      <div class="whorow"><span class="lbl">Name:</span><span class="fill-line"></span></div>
+      <div class="whorow"><span class="lbl">Date:</span><span class="fill-line"></span></div>
+    </div>
+    <div class="scorebox"></div>
+  </div>
+
+  <div class="title">Homework&nbsp; Level 6&nbsp; Lesson 1</div>
+  <div class="subtitle">( Practice B )</div>
+
+  <div class="sec">
+    <span class="seclbl">Lesson:</span>&nbsp;
+    Simple Past Tense: ( was / were ) ( prepositions and adjective )
+  </div>
+
+  <div class="twcap">Past Tense Time Words</div>
+  <table class="tw">
+    <tr><td class="k">New:</td><td>yesterday</td></tr>
+    <tr><td class="k">last</td><td>night / last Monday / last week / last year</td></tr>
+    <tr><td class="k">ago</td><td>two days ago / three weeks ago / four years ago / five minutes ago</td></tr>
+  </table>
+
+  <div class="exbox">
+    <div class="extitle">Example:</div>
+    <div class="exgrid">
+      <div>A)&nbsp; I <u>am</u> in the kitchen <u>now</u>. <span style="white-space:nowrap">( yesterday )</span>
+        <div class="ans">I <u>was</u> in the kitchen <u>yesterday</u>.</div>
+      </div>
+      <div>C)&nbsp; Were you at the park yesterday? <span style="white-space:nowrap">( Yes )</span>
+        <div class="ans">Yes, I was at the park yesterday.</div>
+      </div>
+      <div>B)&nbsp; You <u>are</u> tired <u>now</u>. <span style="white-space:nowrap">( last night )</span>
+        <div class="ans">You <u>were</u> tired <u>last night</u>.</div>
+      </div>
+      <div>D)&nbsp; Was I hungry last week? <span style="white-space:nowrap">( No )</span>
+        <div class="ans">No, you weren't hungry last week.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Vocabulary List:</span>
+    <table class="voc">
+      <tr><td>aunt</td><td>uncle</td><td>brother</td><td>sister</td><td>cousin</td></tr>
+      <tr><td>ten</td><td>twenty</td><td>thirty</td><td>forty</td><td>fifty</td></tr>
+      <tr><td>sixty</td><td>seventy</td><td>eighty</td><td>ninety</td><td>one hundred</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Starter:</span>&nbsp;
+    Talk with your teacher — Where were you yesterday?
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the past tense sentence.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>I am at my cousin's house now. ( last Sunday )</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>You are in the kitchen now. ( twenty minutes ago )</span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>Were you in your mother's car yesterday? ( No )</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>Where were you last Sunday?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>Was I happy in class last week? ( No )</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">6.</span><span>Was I in Taipei last month? ( Yes )</span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the question.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">7.</span><span>No, I was not in the living room ten minutes ago.</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">8.</span><span>Yes, you were angry yesterday.</span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Level 5 Review:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">9.</span><span>Do you drink milk in your bedroom?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">10.</span><span>Do I speak English in class? ( Yes )</span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Family and Friends:&nbsp; Starter:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>What's your English teacher's name?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>How many pencils are in your pencil box?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>What does your father want to do on Sunday?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>There <span class="blank"></span> <span class="choice">( is / are / was )</span> thirty cows on the farm.</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>What's the weather like in Taipei?</span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Corrections:</span>
+    <div class="wl"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+  </div>
+</div>
+
+<!-- ================= PAGE 4: ANSWER KEY ================= -->
+<div class="page key">
+  <h2>Answer Key 參考答案</h2>
+  <div class="keynote">家長／老師批改用 — 標「答案可不同」的題目,依孩子實際情況作答即可。</div>
+
+  <div class="keysec">Homework: Write the past tense sentence.</div>
+  <ol>
+    <li value="1">I <u>was</u> at my cousin's house <u>last Sunday</u>.</li>
+    <li value="2">You <u>were</u> in the kitchen <u>twenty minutes ago</u>.</li>
+  </ol>
+
+  <div class="keysec">Homework: Answer the questions in complete sentences.</div>
+  <ol>
+    <li value="3">No, I wasn't in my mother's car yesterday.</li>
+    <li value="4">I was at home last Sunday. <span class="vary">(答案可不同,例如 at the park / in Hsinchu)</span></li>
+    <li value="5">No, you weren't happy in class last week.</li>
+    <li value="6">Yes, you were in Taipei last month.</li>
+  </ol>
+
+  <div class="keysec">Homework: Write the question.</div>
+  <ol>
+    <li value="7">Were you in the living room ten minutes ago? ( No )</li>
+    <li value="8">Was I angry yesterday? ( Yes )</li>
+  </ol>
+
+  <div class="keysec">Level 5 Review</div>
+  <ol>
+    <li value="9">No, I don't drink milk in my bedroom. <span class="vary">(依實際情況,Yes, I drink milk in my bedroom. 亦可)</span></li>
+    <li value="10">Yes, you speak English in class.</li>
+  </ol>
+
+  <div class="keysec">Family and Friends: Starter</div>
+  <ol>
+    <li value="1">My English teacher's name is __________. <span class="vary">(依實際情況)</span></li>
+    <li value="2">There are __________ pencils in my pencil box. <span class="vary">(依實際情況,注意用 There are)</span></li>
+    <li value="3">He wants to __________ on Sunday. <span class="vary">(例如 He wants to watch TV on Sunday. 注意 wants 加 s)</span></li>
+    <li value="4">are — There <u>are</u> thirty cows on the farm.</li>
+    <li value="5">It is __________ in Taipei. <span class="vary">(例如 It is sunny / raining in Taipei.)</span></li>
+  </ol>
+
+  <div class="keybox">
+    <b>批改重點 Grading focus:</b>
+    ① was / were 與主詞搭配(I・he・she → was;you・we・they → were)
+    ② 時間詞位置與 now → yesterday / last... / ...ago 的替換
+    ③ 回答要用完整句子,句首大寫、句尾句點
+    ④ 寫錯的句子請孩子抄到 Corrections 區訂正一次。
+  </div>
+</div>
+
+</body>
+</html>
