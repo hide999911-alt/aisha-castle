@@ -26,9 +26,11 @@ body {
 }
 
 #canvas {
+	/* 填滿視窗。畫布的「實際像素數」由下面的 fitCanvas 設定 ——
+	   寫死 960x540 等於先渲染小圖再讓瀏覽器放大,高解析素材全被丟掉。 */
 	display: block;
-	width: 960px;
-	height: 540px;
+	width: 100%;
+	height: 100%;
 }
 
 #canvas:focus {
@@ -82,27 +84,26 @@ body {
 				<div id="loader-bar"><div id="loader-fill"></div></div>
 				<div id="loader-text">0%</div>
 			</div>
-			<canvas id="canvas" width="960" height="540"></canvas>
+			<canvas id="canvas"></canvas>
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":50395776,"index.wasm":39509339},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":50395776,"index.wasm":39509339},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const gameCanvas = document.getElementById('canvas');
 const loader = document.getElementById('loader');
 const loaderFill = document.getElementById('loader-fill');
 const loaderText = document.getElementById('loader-text');
-const canvasSize = { x: 960, y: 540 };
-gameCanvas.width = canvasSize.x;
-gameCanvas.height = canvasSize.y;
-
+// 畫布的實際像素數要跟著螢幕走。原本寫死 960x540、只改 CSS 尺寸,
+// 等於遊戲永遠渲染 960x540 再由瀏覽器放大 —— 手機 2400 寬就是放大 2.5 倍,
+// 再高解析度的素材都被丟掉(boss:「解析度還是很差」)。
+// 遊戲內部座標仍是 960x540(project 的 stretch=canvas_items + aspect=keep 會自己處理)。
 function fitCanvas() {
-	const cs = 0.95;
-	const wr = window.innerWidth / window.innerHeight;
-	const cr = canvasSize.x / canvasSize.y;
-	const flgWh = wr < cr;
-	const cw = flgWh ? cs * window.innerWidth : cs * window.innerHeight * cr;
-	const ch = !flgWh ? cs * window.innerHeight : (cs * window.innerWidth) / cr;
-	gameCanvas.style.width = `${cw}px`;
-	gameCanvas.style.height = `${ch}px`;
+	const dpr = Math.min(window.devicePixelRatio || 1, 2);   // 上限 2,免得高 DPI 手機吃太重
+	const w = Math.max(320, Math.round(window.innerWidth * dpr));
+	const h = Math.max(180, Math.round(window.innerHeight * dpr));
+	if (gameCanvas.width !== w || gameCanvas.height !== h) {
+		gameCanvas.width = w;
+		gameCanvas.height = h;
+	}
 }
 
 window.addEventListener('resize', fitCanvas);
