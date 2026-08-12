@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Homework Level 6 — Practice D (Lessons 2 &amp; 3 Review)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8e8e8; }
+  body {
+    font-family: 'Comic Sans MS', 'Comic Neue', 'Segoe Print', 'DejaVu Sans',
+                 'WenQuanYi Zen Hei', sans-serif;
+    color: #111;
+    font-size: 13.5pt;
+    line-height: 1.35;
+  }
+  @page { size: A4; margin: 0; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    padding: 13mm 15mm 12mm 15mm;
+    margin: 0 auto 8mm auto;
+    background: #fff;
+    page-break-after: always;
+  }
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen {
+    .page { box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+  }
+
+  /* ---------- header ---------- */
+  .hdr { display: flex; align-items: flex-start; gap: 6mm; }
+  .hdr .logo { flex: 0 0 auto; }
+  .hdr .who { flex: 1 1 auto; }
+  .whorow { display: flex; align-items: flex-end; gap: 3mm; margin-bottom: 4.5mm; }
+  .whorow .lbl { font-weight: bold; white-space: nowrap; }
+  .fill-line { flex: 1 1 auto; border-bottom: 0.5mm dashed #666; height: 7mm; }
+  .scorebox {
+    flex: 0 0 auto; width: 34mm; height: 20mm;
+    border: 0.7mm solid #000; border-radius: 3mm;
+  }
+  .title { text-align: center; font-weight: bold; font-size: 16pt; margin: 2.5mm 0 1mm 0; }
+  .subtitle { text-align: center; font-size: 12pt; margin-bottom: 3.5mm; }
+
+  /* ---------- sections ---------- */
+  .sec { margin-top: 4mm; }
+  .seclbl { font-weight: bold; }
+  .inst { font-weight: bold; }
+
+  /* time words table */
+  table.tw { border-collapse: collapse; margin: 2mm auto 0 auto; width: 92%; }
+  table.tw td { border: 0.45mm solid #000; padding: 1.4mm 3mm; }
+  table.tw td.k { width: 18mm; font-weight: bold; text-align: center; }
+  .twcap { text-align: center; font-weight: bold; margin-top: 2mm; }
+
+  /* example box */
+  .exbox {
+    border: 1.1mm double #000; outline: 0.45mm solid #000; outline-offset: -2.2mm;
+    padding: 3.5mm 5mm 3mm 5mm; margin-top: 2.5mm;
+  }
+  .exbox .extitle { font-weight: bold; }
+  .exgrid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; row-gap: 2mm; margin-top: 1mm; font-size: 11.5pt; }
+  .exgrid .ans { padding-left: 6.5mm; }
+  u { text-decoration-thickness: 0.5mm; text-underline-offset: 1mm; }
+
+  /* vocabulary table */
+  table.voc { border-collapse: collapse; margin: 2mm auto 0 auto; width: 100%; }
+  table.voc td { border: 0.45mm solid #000; padding: 1.5mm 2mm; text-align: center; width: 20%; }
+
+  /* questions + writing guides */
+  .q { margin-top: 3.6mm; }
+  .q .qt { display: flex; gap: 2.5mm; font-weight: bold; }
+  .q .qn { flex: 0 0 auto; }
+  .wl {
+    position: relative; height: 12.5mm; margin-top: 2.6mm;
+    border-top: 0.5mm solid #333; border-bottom: 0.5mm solid #333;
+  }
+  .wl::before {
+    content: ""; position: absolute; top: 50%; left: 0; right: 0;
+    border-top: 0.4mm dashed #9a9a9a;
+  }
+  .nb { white-space: nowrap; }
+
+  /* answer key */
+  .key h2 { text-align: center; font-size: 15pt; margin-bottom: 1mm; }
+  .keynote { text-align: center; font-size: 10.5pt; color: #333; margin-bottom: 3.5mm; }
+  .key ol { margin-left: 8mm; }
+  .key li { margin-top: 2mm; }
+  .vary { color: #555; font-size: 10.5pt; }
+  .keysec { font-weight: bold; margin-top: 3.5mm; }
+  .keybox { border: 0.45mm solid #000; border-radius: 2mm; padding: 3mm 4mm; margin-top: 3.5mm; font-size: 11pt; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="hdr">
+    <div class="logo">
+      <svg width="64" height="72" viewBox="0 0 64 72" aria-hidden="true">
+        <path d="M32 2 L60 10 V38 C60 54 47 66 32 70 C17 66 4 54 4 38 V10 Z"
+              fill="none" stroke="#000" stroke-width="3"/>
+        <path d="M32 14 l5.2 10.6 11.7 1.7 -8.5 8.2 2 11.6 L32 40.6 21.6 46.1 l2 -11.6 -8.5 -8.2 11.7 -1.7 Z"
+              fill="#000"/>
+        <text x="32" y="62" text-anchor="middle" font-size="9" font-weight="bold" font-family="inherit">ENGLISH</text>
+      </svg>
+    </div>
+    <div class="who">
+      <div class="whorow"><span class="lbl">Name:</span><span class="fill-line"></span></div>
+      <div class="whorow"><span class="lbl">Date:</span><span class="fill-line"></span></div>
+    </div>
+    <div class="scorebox"></div>
+  </div>
+
+  <div class="title">Homework&nbsp; Level 6&nbsp; ( Practice D )</div>
+  <div class="subtitle">Lessons 2 &amp; 3 Review</div>
+
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Lesson:</span>&nbsp;
+    Simple Past Tense: ( was / were ) ( prepositions and adjective )
+  </div>
+
+  <div class="twcap">Past Tense Time Words</div>
+  <table class="tw">
+    <tr><td class="k">New:</td><td>yesterday</td></tr>
+    <tr><td class="k">last</td><td>night / last Monday / last week / last year</td></tr>
+    <tr><td class="k">ago</td><td>two days ago / three weeks ago / four years ago / five minutes ago</td></tr>
+  </table>
+
+  <div class="exbox">
+    <div class="extitle">Example:</div>
+    <div class="exgrid">
+      <div>A)&nbsp; Rosy <u>is</u> at school <u>now</u>. <span class="nb">( yesterday )</span>
+        <div class="ans">She <u>was</u> at school <u>yesterday</u>.</div>
+      </div>
+      <div>C)&nbsp; Was the bird in the tree yesterday? <span class="nb">( Yes )</span>
+        <div class="ans">Yes, it was in the tree yesterday.</div>
+      </div>
+      <div>B)&nbsp; Billy <u>isn't</u> happy <u>now</u>. <span class="nb">( last week )</span>
+        <div class="ans">He <u>wasn't</u> happy <u>last week</u>.</div>
+      </div>
+      <div>D)&nbsp; Where was Mom five minutes ago? <span class="nb">( living room )</span>
+        <div class="ans">She was in the living room five minutes ago.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Unit 1:&nbsp; Review&nbsp; —&nbsp; Vocabulary List:</span>
+    <table class="voc">
+      <tr><td>Taiwan</td><td>South Korea</td><td>Vietnam</td><td>Mexico</td><td>Spain</td></tr>
+      <tr><td>Thailand</td><td>Australia</td><td>Brazil</td><td>America</td><td>people</td></tr>
+      <tr><td>spring</td><td>summer</td><td>fall</td><td>winter</td><td>garden</td></tr>
+      <tr><td>season</td><td>forest</td><td>awake</td><td>asleep</td><td>world</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the past tense sentence.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>My grandmother is in Thailand now. <span class="nb">( two weeks ago )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>Billy is afraid of snakes. <span class="nb">( last year )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>Was it hot in Mexico last summer? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>Was it rainy in Taiwan two days ago? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>Was Rosy awake in the bedroom one hour ago? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">6.</span><span>Was your uncle in the garden ten minutes ago? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the question.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">7.</span><span>Yes, she was scared of the spiders. <span class="nb">( x - she )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">8.</span><span>No, he wasn't asleep in class three hours ago. <span class="nb">( x - he )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Level 5 Review:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">9.</span><span>Does Billy play soccer in the park? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">10.</span><span>Does your mother cook dinner in the kitchen? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Family and Friends:&nbsp; Unit 1:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>Where is your mother from?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>Is your father from Thailand?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>Is Billy from Brazil? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>Where is Rosy from? <span class="nb">( the U.S.A. )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>How old is Tim? <span class="nb">( 8 )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">6.</span><span>How old is your cousin?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">7.</span><span>Are Rosy and Tim from the U.S.A.? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">8.</span><span>Are these dogs from Australia? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 4: CORRECTIONS ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Corrections:</span>
+    <div class="wl"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+  </div>
+</div>
+
+<!-- ================= PAGE 5: ANSWER KEY ================= -->
+<div class="page key">
+  <h2>Answer Key 完整參考答案</h2>
+  <div class="keynote">家長／老師批改用 — 標「依實際情況」的題目,孩子照真實情況寫即可,句型對就給分。</div>
+
+  <div class="keysec">Homework: Write the past tense sentence.</div>
+  <ol>
+    <li value="1">My grandmother <u>was</u> in Thailand <u>two weeks ago</u>. <span class="vary">(She was in Thailand two weeks ago. 亦可)</span></li>
+    <li value="2">Billy <u>was</u> afraid of snakes <u>last year</u>. <span class="vary">(He was afraid of snakes last year. 亦可)</span></li>
+  </ol>
+
+  <div class="keysec">Homework: Answer the questions in complete sentences.</div>
+  <ol>
+    <li value="3">Yes, it was hot in Mexico last summer.</li>
+    <li value="4">No, it wasn't rainy in Taiwan two days ago.</li>
+    <li value="5">No, she wasn't awake in the bedroom one hour ago. <span class="vary">(Rosy → she)</span></li>
+    <li value="6">Yes, he was in the garden ten minutes ago. <span class="vary">(Yes, my uncle was... 亦可)</span></li>
+  </ol>
+
+  <div class="keysec">Homework: Write the question.</div>
+  <ol>
+    <li value="7">Was Lillian scared of the spiders? ( Yes ) <span class="vary">(x - she → 用 Lillian)</span></li>
+    <li value="8">Was Ian asleep in class three hours ago? ( No ) <span class="vary">(x - he → 用 Ian)</span></li>
+  </ol>
+
+  <div class="keysec">Level 5 Review</div>
+  <ol>
+    <li value="9">No, he doesn't play soccer in the park.</li>
+    <li value="10">Yes, she cook<u>s</u> dinner in the kitchen. <span class="vary">(注意三單動詞加 s:cooks)</span></li>
+  </ol>
+
+  <div class="keysec">Family and Friends: Unit 1</div>
+  <ol>
+    <li value="1">She is from __________. <span class="vary">(依實際情況,例如 She is from Taiwan.;國名開頭要大寫)</span></li>
+    <li value="2">Yes, he is from Thailand. / No, he isn't from Thailand. <span class="vary">(依實際情況)</span></li>
+    <li value="3">No, he isn't from Brazil.</li>
+    <li value="4">She is from the U.S.A.</li>
+    <li value="5">He is eight years old. <span class="vary">(Tim → he)</span></li>
+    <li value="6">He is __________ years old. / She is __________ years old. <span class="vary">(依實際情況)</span></li>
+    <li value="7">Yes, they are from the U.S.A. <span class="vary">(Rosy and Tim → they)</span></li>
+    <li value="8">No, they aren't from Australia. <span class="vary">(these dogs → they)</span></li>
+  </ol>
+
+  <div class="keybox">
+    <b>批改重點 Grading focus:</b>
+    ① was / wasn't 與主詞、時間詞搭配(now → yesterday / last... / ...ago)
+    ② 寫問句時 ( x - she ) 換成 Lillian、( x - he ) 換成 Ian,句尾要有問號和 ( Yes / No )
+    ③ Level 5 Review 是現在式:三單動詞加 s(sees / reads),否定用 doesn't
+    ④ 複數主詞(Rosy and Tim / these dogs)用 are,回答換成 they are / they aren't
+    ⑤ 國名開頭大寫(Taiwan、Mexico...);寫錯的句子抄到 Corrections 區訂正一次。
+  </div>
+</div>
+
+</body>
+</html>

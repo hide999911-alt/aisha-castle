@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spelling Test 單字聽寫作答卷</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8e8e8; }
+  body {
+    font-family: 'Comic Sans MS', 'Comic Neue', 'Segoe Print', 'DejaVu Sans',
+                 'WenQuanYi Zen Hei', sans-serif;
+    color: #111;
+    font-size: 13.5pt;
+    line-height: 1.35;
+  }
+  @page { size: A4; margin: 0; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    padding: 13mm 15mm 12mm 15mm;
+    margin: 0 auto 8mm auto;
+    background: #fff;
+    page-break-after: always;
+  }
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen {
+    .page { box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+  }
+
+  .hdr { display: flex; align-items: flex-start; gap: 6mm; }
+  .hdr .logo { flex: 0 0 auto; }
+  .hdr .who { flex: 1 1 auto; }
+  .whorow { display: flex; align-items: flex-end; gap: 3mm; margin-bottom: 4.5mm; }
+  .whorow .lbl { font-weight: bold; white-space: nowrap; }
+  .fill-line { flex: 1 1 auto; border-bottom: 0.5mm dashed #666; height: 7mm; }
+  .scorebox {
+    flex: 0 0 auto; width: 34mm; height: 20mm;
+    border: 0.7mm solid #000; border-radius: 3mm;
+  }
+  .title { text-align: center; font-weight: bold; font-size: 16pt; margin: 3mm 0 1mm 0; }
+  .subtitle { text-align: center; font-size: 12pt; margin-bottom: 4mm; }
+  .inst { font-weight: bold; margin-bottom: 2mm; }
+
+  .dictgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 9mm;
+    row-gap: 5.2mm;
+    margin-top: 4mm;
+  }
+  .dq { display: flex; gap: 2.5mm; align-items: center; }
+  .dq .qn { flex: 0 0 8mm; font-weight: bold; text-align: right; }
+  .wl {
+    position: relative; flex: 1 1 auto; height: 11.5mm;
+    border-top: 0.5mm solid #333; border-bottom: 0.5mm solid #333;
+  }
+  .wl::before {
+    content: ""; position: absolute; top: 50%; left: 0; right: 0;
+    border-top: 0.4mm dashed #9a9a9a;
+  }
+
+  .scoreline { margin-top: 6mm; text-align: right; font-weight: bold; }
+
+  /* page 2 reference */
+  .keycap { text-align: center; font-weight: bold; font-size: 15pt; margin-bottom: 1mm; }
+  .keynote { text-align: center; font-size: 10.5pt; color: #333; margin-bottom: 4mm; }
+  .seclbl { font-weight: bold; margin-top: 5mm; display: block; }
+  table.voc { border-collapse: collapse; margin: 2.5mm auto 0 auto; width: 100%; }
+  table.voc td { border: 0.45mm solid #000; padding: 1.6mm 1mm; text-align: center; width: 20%; }
+  table.voc td small { display: block; font-size: 9.5pt; color: #444; }
+  .howto { border: 0.45mm solid #000; border-radius: 2mm; padding: 3mm 4mm; margin-top: 6mm; font-size: 11.5pt; }
+  .howto b { display: block; margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1: ANSWER SHEET ================= -->
+<div class="page">
+  <div class="hdr">
+    <div class="logo">
+      <svg width="64" height="72" viewBox="0 0 64 72" aria-hidden="true">
+        <path d="M32 2 L60 10 V38 C60 54 47 66 32 70 C17 66 4 54 4 38 V10 Z"
+              fill="none" stroke="#000" stroke-width="3"/>
+        <path d="M32 14 l5.2 10.6 11.7 1.7 -8.5 8.2 2 11.6 L32 40.6 21.6 46.1 l2 -11.6 -8.5 -8.2 11.7 -1.7 Z"
+              fill="#000"/>
+        <text x="32" y="62" text-anchor="middle" font-size="9" font-weight="bold" font-family="inherit">ENGLISH</text>
+      </svg>
+    </div>
+    <div class="who">
+      <div class="whorow"><span class="lbl">Name:</span><span class="fill-line"></span></div>
+      <div class="whorow"><span class="lbl">Date:</span><span class="fill-line"></span></div>
+    </div>
+    <div class="scorebox"></div>
+  </div>
+
+  <div class="title">Spelling Test&nbsp; 單字聽寫</div>
+  <div class="subtitle">G2.1&nbsp; Midterm Test Words</div>
+
+  <div class="inst">Listen and write the words.&nbsp; 仔細聽,把單字拼寫在線上。</div>
+
+  <div class="dictgrid">
+    <div class="dq"><span class="qn">1.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">11.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">2.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">12.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">3.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">13.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">4.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">14.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">5.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">15.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">6.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">16.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">7.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">17.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">8.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">18.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">9.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">19.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">10.</span><span class="wl"></span></div>
+    <div class="dq"><span class="qn">20.</span><span class="wl"></span></div>
+  </div>
+
+  <div class="scoreline">答對 ________ / 題數 ________</div>
+</div>
+
+<!-- ================= PAGE 2: WORD LISTS L1-L4 ================= -->
+<div class="page">
+  <div class="keycap">單字對照表(一)&nbsp; Midterm Test Words</div>
+  <div class="keynote">批改用 — 「課本順序」照下表順序播放;「隨機」模式請看播放器結束後的「答案對照」畫面。</div>
+
+  <span class="seclbl">Lesson 1 — 家人・數字(15 字)</span>
+  <table class="voc">
+    <tr>
+      <td>aunt<small>阿姨/姑姑</small></td>
+      <td>uncle<small>叔叔/舅舅</small></td>
+      <td>brother<small>兄弟</small></td>
+      <td>sister<small>姊妹</small></td>
+      <td>cousin<small>表(堂)兄弟姊妹</small></td>
+    </tr>
+    <tr>
+      <td>ten<small>十</small></td>
+      <td>twenty<small>二十</small></td>
+      <td>thirty<small>三十</small></td>
+      <td>forty<small>四十</small></td>
+      <td>fifty<small>五十</small></td>
+    </tr>
+    <tr>
+      <td>sixty<small>六十</small></td>
+      <td>seventy<small>七十</small></td>
+      <td>eighty<small>八十</small></td>
+      <td>ninety<small>九十</small></td>
+      <td>one hundred<small>一百</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 2 — 國家(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>Taiwan<small>台灣</small></td>
+      <td>South Korea<small>南韓</small></td>
+      <td>Vietnam<small>越南</small></td>
+      <td>Mexico<small>墨西哥</small></td>
+      <td>Spain<small>西班牙</small></td>
+    </tr>
+    <tr>
+      <td>Thailand<small>泰國</small></td>
+      <td>Australia<small>澳洲</small></td>
+      <td>Brazil<small>巴西</small></td>
+      <td>America<small>美國</small></td>
+      <td>people<small>人們</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 3 — 季節(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>spring<small>春天</small></td>
+      <td>summer<small>夏天</small></td>
+      <td>fall<small>秋天</small></td>
+      <td>winter<small>冬天</small></td>
+      <td>garden<small>花園</small></td>
+    </tr>
+    <tr>
+      <td>season<small>季節</small></td>
+      <td>forest<small>森林</small></td>
+      <td>awake<small>清醒的</small></td>
+      <td>asleep<small>睡著的</small></td>
+      <td>world<small>世界</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 4 — 運動(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>read comics<small>看漫畫書</small></td>
+      <td>skateboard<small>滑板</small></td>
+      <td>gymnastics<small>體操</small></td>
+      <td>chess<small>棋子</small></td>
+      <td>basketball<small>籃球</small></td>
+    </tr>
+    <tr>
+      <td>photos<small>照片</small></td>
+      <td>volleyball<small>排球</small></td>
+      <td>tennis<small>網球</small></td>
+      <td>weekend<small>周末</small></td>
+      <td>pictures<small>圖片</small></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ================= PAGE 3: WORD LISTS L5-L8 ================= -->
+<div class="page">
+  <div class="keycap">單字對照表(二)&nbsp; Midterm Test Words</div>
+  <div class="keynote">Lesson 5 – Lesson 8</div>
+
+  <span class="seclbl">Lesson 5 — 嗜好・樂器(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>hobbies<small>嗜好</small></td>
+      <td>popular<small>受歡迎的</small></td>
+      <td>country<small>國家</small></td>
+      <td>computer<small>電腦</small></td>
+      <td>sports<small>運動</small></td>
+    </tr>
+    <tr>
+      <td>guitar<small>吉他</small></td>
+      <td>piano<small>鋼琴</small></td>
+      <td>music<small>音樂</small></td>
+      <td>dance<small>跳舞</small></td>
+      <td>painting<small>畫畫</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 6 — 電器・形容(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>computer<small>電腦</small></td>
+      <td>DVD/CD/MP3 player<small>數位播放器</small></td>
+      <td>camera<small>相機</small></td>
+      <td>turn on<small>打開</small></td>
+      <td>turn off<small>關掉</small></td>
+    </tr>
+    <tr>
+      <td>boring<small>無聊的</small></td>
+      <td>project<small>方案</small></td>
+      <td>broken<small>壞掉的</small></td>
+      <td>space<small>空間</small></td>
+      <td>please<small>請求</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 7 — 收藏品(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>stickers<small>貼紙</small></td>
+      <td>posters<small>海報</small></td>
+      <td>comics<small>漫畫</small></td>
+      <td>postcards<small>明信片</small></td>
+      <td>pins<small>大頭針</small></td>
+    </tr>
+    <tr>
+      <td>shells<small>貝殼</small></td>
+      <td>friends<small>朋友</small></td>
+      <td>pictures<small>照片</small></td>
+      <td>favorite<small>最喜愛的</small></td>
+      <td>cool<small>冷的</small></td>
+    </tr>
+  </table>
+
+  <span class="seclbl">Lesson 8 — 水上運動(10 字)</span>
+  <table class="voc">
+    <tr>
+      <td>swim<small>游泳</small></td>
+      <td>sail<small>划船</small></td>
+      <td>dive<small>潛水</small></td>
+      <td>surf<small>衝浪</small></td>
+      <td>kayak<small>獨木舟</small></td>
+    </tr>
+    <tr>
+      <td>windsurf<small>風帆衝浪</small></td>
+      <td>snorkel<small>水下呼吸器</small></td>
+      <td>waterski<small>滑水運動</small></td>
+      <td>standing<small>站立</small></td>
+      <td>falling<small>下墜</small></td>
+    </tr>
+  </table>
+
+  <div class="howto">
+    <b>使用方法 How to use:</b>
+    ① 印出第 1 頁作答卷給孩子(考 10 題可對折使用)
+    ② 家長用手機打開「單字聽寫」播放器網頁
+    ③ 選單字範圍(單課或期中考全部)、題數和寫字秒數,按「▶ 開始聽寫」— 會先唸題號,每個單字唸兩次
+    ④ 唸完自動進下一題;需要時可按「再聽一次」
+    ⑤ 結束後照「答案對照」批改,大小寫也要對(國名開頭大寫)。
+  </div>
+</div>
+
+</body>
+</html>
