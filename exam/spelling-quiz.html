@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>單字聽寫</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper: #FDFBF4;
+    --card: #FFFFFF;
+    --ink: #24344D;
+    --muted: #6E7A8E;
+    --line: #C7D3E4;
+    --accent: #D9483B;
+    --accent-ink: #FFFFFF;
+    --good: #2E7D53;
+    --chip: #EEF2F8;
+    --chip-on: #24344D;
+    --chip-on-ink: #FDFBF4;
+    --shadow: 0 1px 3px rgba(36,52,77,.12), 0 4px 14px rgba(36,52,77,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #171B22;
+      --card: #1F242E;
+      --ink: #E8EBF2;
+      --muted: #9AA5B7;
+      --line: #39435A;
+      --accent: #E2594C;
+      --accent-ink: #FFF7F6;
+      --good: #58B98A;
+      --chip: #2A3140;
+      --chip-on: #E8EBF2;
+      --chip-on-ink: #171B22;
+      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #171B22;
+    --card: #1F242E;
+    --ink: #E8EBF2;
+    --muted: #9AA5B7;
+    --line: #39435A;
+    --accent: #E2594C;
+    --accent-ink: #FFF7F6;
+    --good: #58B98A;
+    --chip: #2A3140;
+    --chip-on: #E8EBF2;
+    --chip-on-ink: #171B22;
+    --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC',
+                 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+    line-height: 1.5;
+    padding: 20px 16px 48px;
+  }
+  .school {
+    font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', 'Segoe Print',
+                 -apple-system, sans-serif;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+
+  header h1 { font-size: 26px; letter-spacing: .04em; }
+  header p { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+
+  .lbl {
+    display: block;
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: var(--muted);
+    margin: 10px 0 6px;
+  }
+  .lbl:first-child { margin-top: 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: var(--chip);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--chip-on);
+    color: var(--chip-on-ink);
+    border-color: var(--chip-on);
+  }
+  .chip:focus-visible, button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---- test stage: exercise-book paper ---- */
+  .stage {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 26px 20px 22px 34px;
+    text-align: center;
+    background:
+      linear-gradient(to right, transparent 22px, var(--accent) 22px, var(--accent) 23.5px, transparent 23.5px),
+      repeating-linear-gradient(to bottom, var(--card) 0, var(--card) 27px, var(--line) 27px, var(--line) 28px);
+  }
+  .stage .status { font-size: 15px; color: var(--muted); min-height: 22px; }
+  .stage .big {
+    font-size: 44px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    margin: 6px 0 2px;
+  }
+  .stage .sub { font-size: 16px; color: var(--muted); min-height: 24px; }
+
+  .playbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px 34px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .playbtn:active { transform: translateY(1px); }
+
+  .ctrls { display: flex; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .ctrls button {
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 12px;
+    min-width: 66px;
+    padding: 10px 12px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .ctrls button b { display: block; font-size: 18px; }
+
+  .bar {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--chip);
+    margin-top: 18px;
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--good);
+    border-radius: 999px;
+    transition: width .15s linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar i { transition: none; }
+    .playbtn:active { transform: none; }
+  }
+
+  /* ---- practice grid ---- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 10px; }
+  .wordcard {
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 10px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .wordcard small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .wordcard .spk { float: right; color: var(--accent); }
+
+  /* ---- answers ---- */
+  .answers ol { margin: 10px 0 0 26px; }
+  .answers li { font-size: 19px; margin-top: 6px; }
+  .answers li small { color: var(--muted); font-size: 13px; margin-left: 8px; }
+  .rowbtns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .rowbtns button {
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .rowbtns button.primary { background: var(--good); border-color: var(--good); color: #fff; font-weight: 700; }
+
+  .note { color: var(--muted); font-size: 13px; margin-top: 10px; }
+  .hide { display: none !important; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1 class="school">單字聽寫 Spelling Test</h1>
+    <p>播放英文單字,孩子在紙上拼寫 — 配合列印的作答卷使用</p>
+  </header>
+
+  <section class="card" id="settings">
+    <span class="lbl">單字範圍</span>
+    <div class="chips" id="listChips" role="group" aria-label="單字範圍"></div>
+
+    <span class="lbl">順序</span>
+    <div class="chips" id="orderChips" role="group" aria-label="順序">
+      <button class="chip" data-v="book" aria-pressed="true">課本順序</button>
+      <button class="chip" data-v="shuffle" aria-pressed="false">隨機</button>
+    </div>
+
+    <span class="lbl">每個單字唸幾次</span>
+    <div class="chips" id="repChips" role="group" aria-label="次數">
+      <button class="chip" data-v="1" aria-pressed="false">1 次</button>
+      <button class="chip" data-v="2" aria-pressed="true">2 次</button>
+      <button class="chip" data-v="3" aria-pressed="false">3 次</button>
+    </div>
+
+    <span class="lbl">寫字時間(每題間隔)</span>
+    <div class="chips" id="gapChips" role="group" aria-label="間隔">
+      <button class="chip" data-v="5" aria-pressed="false">5 秒</button>
+      <button class="chip" data-v="8" aria-pressed="true">8 秒</button>
+      <button class="chip" data-v="12" aria-pressed="false">12 秒</button>
+      <button class="chip" data-v="20" aria-pressed="false">20 秒</button>
+    </div>
+
+    <span class="lbl">語速</span>
+    <div class="chips" id="rateChips" role="group" aria-label="語速">
+      <button class="chip" data-v="0.7" aria-pressed="false">慢</button>
+      <button class="chip" data-v="0.85" aria-pressed="true">正常</button>
+    </div>
+  </section>
+
+  <section class="stage" id="stage">
+    <div class="status" id="status">按下開始,會先唸題號,再唸單字</div>
+    <div class="big school" id="bigNum">準備好了嗎?</div>
+    <div class="sub" id="sub">共 20 題</div>
+    <button class="playbtn" id="mainBtn">▶ 開始聽寫</button>
+    <div class="ctrls hide" id="ctrls">
+      <button id="replayBtn">🔁<b>再聽一次</b></button>
+      <button id="prevBtn">⏮<b>上一題</b></button>
+      <button id="nextBtn">⏭<b>下一題</b></button>
+      <button id="stopBtn">⏹<b>結束</b></button>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+  </section>
+
+  <section class="card answers hide" id="answers">
+    <span class="lbl">答案對照(依本次播放順序)</span>
+    <ol id="answerList"></ol>
+    <div class="rowbtns">
+      <button class="primary" id="againBtn">🔄 再測一次</button>
+    </div>
+  </section>
+
+  <section class="card" id="practice">
+    <span class="lbl">練習模式 — 點單字聽發音</span>
+    <div class="rowbtns" style="margin-top:0">
+      <button id="zhToggle">隱藏中文</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note">聽寫進行中會先收起這一區,避免小朋友偷看 😄</p>
+  </section>
+
+  <p class="note" id="voiceNote">聲音來自手機/電腦內建的語音(建議 iPhone 或 Chrome,發音較自然)。第一次按「開始」後才會出聲。</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var LISTS = {
+    l1: {
+      name: 'L1 家人・數字',
+      words: [
+        ['aunt', '阿姨/姑姑'], ['uncle', '叔叔/舅舅'], ['brother', '兄弟'],
+        ['sister', '姊妹'], ['cousin', '表(堂)兄弟姊妹'],
+        ['ten', '十'], ['twenty', '二十'], ['thirty', '三十'], ['forty', '四十'],
+        ['fifty', '五十'], ['sixty', '六十'], ['seventy', '七十'],
+        ['eighty', '八十'], ['ninety', '九十'], ['one hundred', '一百']
+      ]
+    },
+    l23: {
+      name: 'L2–3 國家・季節',
+      words: [
+        ['Taiwan', '台灣'], ['South Korea', '南韓'], ['Vietnam', '越南'],
+        ['Mexico', '墨西哥'], ['Spain', '西班牙'], ['Thailand', '泰國'],
+        ['Australia', '澳洲'], ['Brazil', '巴西'], ['America', '美國'],
+        ['people', '人們'], ['spring', '春天'], ['summer', '夏天'],
+        ['fall', '秋天'], ['winter', '冬天'], ['garden', '花園'],
+        ['season', '季節'], ['forest', '森林'], ['awake', '醒著的'],
+        ['asleep', '睡著的'], ['world', '世界']
+      ]
+    }
+  };
+  LISTS.all = { name: '全部 35 字', words: LISTS.l1.words.concat(LISTS.l23.words) };
+
+  var state = {
+    list: 'l23', order: 'book', reps: 2, gap: 8, rate: 0.85,
+    idx: 0, run: 0, playing: false, paused: false, used: []
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var stageEls = {
+    status: $('status'), big: $('bigNum'), sub: $('sub'),
+    main: $('mainBtn'), ctrls: $('ctrls'), bar: $('barFill')
+  };
+
+  /* ---------- settings chips ---------- */
+  function chipGroup(el, onPick) {
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.chip');
+      if (!b) return;
+      Array.prototype.forEach.call(el.querySelectorAll('.chip'), function (c) {
+        c.setAttribute('aria-pressed', c === b ? 'true' : 'false');
+      });
+      onPick(b.dataset.v);
+    });
+  }
+  (function buildListChips() {
+    var el = $('listChips');
+    Object.keys(LISTS).forEach(function (k) {
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.dataset.v = k;
+      b.textContent = LISTS[k].name;
+      b.setAttribute('aria-pressed', k === state.list ? 'true' : 'false');
+      el.appendChild(b);
+    });
+    chipGroup(el, function (v) { state.list = v; resetStage(); buildGrid(); });
+  })();
+  chipGroup($('orderChips'), function (v) { state.order = v; resetStage(); });
+  chipGroup($('repChips'), function (v) { state.reps = +v; });
+  chipGroup($('gapChips'), function (v) { state.gap = +v; });
+  chipGroup($('rateChips'), function (v) { state.rate = +v; });
+
+  /* ---------- speech ---------- */
+  var voices = [];
+  function loadVoices() { voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
+  if (window.speechSynthesis) {
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+  } else {
+    $('voiceNote').textContent = '這個瀏覽器不支援語音播放,請改用 iPhone Safari 或 Chrome 開啟。';
+  }
+  function pickVoice(pref) {
+    var best = null, score = -1;
+    voices.forEach(function (v) {
+      var s = 0;
+      if (v.lang && v.lang.indexOf(pref) === 0) s += 4;
+      else if (v.lang && v.lang.indexOf(pref.slice(0, 2)) === 0) s += 2;
+      else return;
+      if (/Samantha|Google|Natural|Aria|Karen|Daniel/i.test(v.name)) s += 2;
+      if (v.localService) s += 1;
+      if (s > score) { score = s; best = v; }
+    });
+    return best;
+  }
+  function cancelSpeech() { cancelSpeech(); }
+  function speak(text, lang, rate) {
+    return new Promise(function (res) {
+      if (!window.speechSynthesis) return res();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = lang;
+      var v = pickVoice(lang);
+      if (v) u.voice = v;
+      u.rate = rate || 1;
+      u.onend = res;
+      u.onerror = function () { res(); };
+      speechSynthesis.speak(u);
+    });
+  }
+  function sleepCheck(ms, run, quiet) {
+    return new Promise(function (res) {
+      var t0 = Date.now();
+      (function tick() {
+        if (state.run !== run) return res(false);
+        var left = ms - (Date.now() - t0);
+        if (!quiet) {
+          stageEls.bar.style.width = Math.min(100, 100 * (1 - left / ms)) + '%';
+          if (left > 0) stageEls.sub.textContent = '✏️ 寫字時間 ' + Math.ceil(left / 1000) + ' 秒';
+        }
+        if (left <= 0) return res(true);
+        setTimeout(tick, 120);
+      })();
+    });
+  }
+
+  /* ---------- test engine ---------- */
+  function makeOrder() {
+    var w = LISTS[state.list].words.slice();
+    if (state.order === 'shuffle') {
+      for (var i = w.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = w[i]; w[i] = w[j]; w[j] = t;
+      }
+    }
+    return w;
+  }
+  function updateHead() {
+    stageEls.big.textContent = '第 ' + (state.idx + 1) + ' 題';
+    stageEls.status.textContent = '共 ' + state.used.length + ' 題';
+  }
+  async function runFrom(i) {
+    var run = ++state.run;
+    state.playing = true; state.paused = false;
+    stageEls.main.textContent = '⏸ 暫停';
+    stageEls.ctrls.classList.remove('hide');
+    $('practice').classList.add('hide');
+    $('answers').classList.add('hide');
+    for (state.idx = i; state.idx < state.used.length; ) {
+      if (state.run !== run) return;
+      updateHead();
+      stageEls.bar.style.width = '0%';
+      var zh = pickVoice('zh');
+      stageEls.sub.textContent = '🔊 聽好囉…';
+      await (zh ? speak('第' + (state.idx + 1) + '題', 'zh-TW', 1)
+                : speak('Number ' + (state.idx + 1), 'en-US', 0.9));
+      for (var r = 0; r < state.reps; r++) {
+        if (state.run !== run) return;
+        await speak(state.used[state.idx][0], 'en-US', state.rate);
+        if (r < state.reps - 1) await sleepCheck(900, run, true);
+      }
+      if (state.run !== run) return;
+      var ok = await sleepCheck(state.gap * 1000, run);
+      if (!ok || state.run !== run) return;
+      state.idx++;
+    }
+    if (state.run === run) finish();
+  }
+  function finish() {
+    state.playing = false;
+    stageEls.big.textContent = '🎉 聽寫結束';
+    stageEls.sub.textContent = '對答案囉!';
+    stageEls.status.textContent = '';
+    stageEls.main.textContent = '▶ 重新開始';
+    stageEls.ctrls.classList.add('hide');
+    stageEls.bar.style.width = '100%';
+    showAnswers();
+  }
+  function showAnswers() {
+    var ol = $('answerList');
+    ol.innerHTML = '';
+    state.used.forEach(function (w) {
+      var li = document.createElement('li');
+      li.className = 'school';
+      li.textContent = w[0];
+      var s = document.createElement('small');
+      s.textContent = w[1];
+      li.appendChild(s);
+      ol.appendChild(li);
+    });
+    $('answers').classList.remove('hide');
+  }
+  function resetStage() {
+    state.run++;
+    cancelSpeech();
+    state.playing = false; state.paused = false; state.idx = 0; state.used = [];
+    stageEls.big.textContent = '準備好了嗎?';
+    stageEls.sub.textContent = '共 ' + LISTS[state.list].words.length + ' 題';
+    stageEls.status.textContent = '按下開始,會先唸題號,再唸單字';
+    stageEls.main.textContent = '▶ 開始聽寫';
+    stageEls.ctrls.classList.add('hide');
+    stageEls.bar.style.width = '0%';
+    $('answers').classList.add('hide');
+    $('practice').classList.remove('hide');
+  }
+
+  stageEls.main.addEventListener('click', function () {
+    if (!state.playing) {
+      if (!state.used.length || state.idx >= state.used.length) state.used = makeOrder();
+      runFrom(state.paused ? state.idx : 0);
+    } else {
+      state.run++;
+      cancelSpeech();
+      state.playing = false; state.paused = true;
+      stageEls.main.textContent = '▶ 繼續';
+      stageEls.sub.textContent = '已暫停,按「繼續」從本題重播';
+    }
+  });
+  $('replayBtn').addEventListener('click', function () {
+    if (state.used.length) { cancelSpeech(); runFrom(state.idx); }
+  });
+  $('prevBtn').addEventListener('click', function () {
+    if (state.used.length) { cancelSpeech(); runFrom(Math.max(0, state.idx - 1)); }
+  });
+  $('nextBtn').addEventListener('click', function () {
+    if (state.used.length) { cancelSpeech(); runFrom(Math.min(state.used.length - 1, state.idx + 1)); }
+  });
+  $('stopBtn').addEventListener('click', function () {
+    state.run++;
+    cancelSpeech();
+    state.playing = false;
+    stageEls.main.textContent = '▶ 重新開始';
+    stageEls.ctrls.classList.add('hide');
+    finish();
+  });
+  $('againBtn').addEventListener('click', resetStage);
+
+  /* ---------- practice grid ---------- */
+  var zhShown = true;
+  function buildGrid() {
+    var g = $('grid');
+    g.innerHTML = '';
+    LISTS[state.list].words.forEach(function (w) {
+      var b = document.createElement('button');
+      b.className = 'wordcard';
+      b.innerHTML = '<span class="spk">🔊</span><span class="school">' + w[0] + '</span>' +
+                    (zhShown ? '<small>' + w[1] + '</small>' : '');
+      b.addEventListener('click', function () { speak(w[0], 'en-US', state.rate); });
+      g.appendChild(b);
+    });
+  }
+  $('zhToggle').addEventListener('click', function () {
+    zhShown = !zhShown;
+    this.textContent = zhShown ? '隱藏中文' : '顯示中文';
+    buildGrid();
+  });
+  buildGrid();
+  resetStage();
+})();
+</script>
+
+</body>
+</html>
