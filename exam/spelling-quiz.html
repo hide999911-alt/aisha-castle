@@ -230,6 +230,13 @@
       <button class="chip" data-v="shuffle" aria-pressed="false">隨機</button>
     </div>
 
+    <span class="lbl">題數(作答卷一張 20 格)</span>
+    <div class="chips" id="countChips" role="group" aria-label="題數">
+      <button class="chip" data-v="10" aria-pressed="false">10 題</button>
+      <button class="chip" data-v="20" aria-pressed="true">20 題</button>
+      <button class="chip" data-v="0" aria-pressed="false">全部</button>
+    </div>
+
     <span class="lbl">每個單字唸幾次</span>
     <div class="chips" id="repChips" role="group" aria-label="次數">
       <button class="chip" data-v="1" aria-pressed="false">1 次</button>
@@ -301,23 +308,81 @@
         ['eighty', '八十'], ['ninety', '九十'], ['one hundred', '一百']
       ]
     },
-    l23: {
-      name: 'L2–3 國家・季節',
+    l2: {
+      name: 'L2 國家',
       words: [
         ['Taiwan', '台灣'], ['South Korea', '南韓'], ['Vietnam', '越南'],
         ['Mexico', '墨西哥'], ['Spain', '西班牙'], ['Thailand', '泰國'],
         ['Australia', '澳洲'], ['Brazil', '巴西'], ['America', '美國'],
-        ['people', '人們'], ['spring', '春天'], ['summer', '夏天'],
-        ['fall', '秋天'], ['winter', '冬天'], ['garden', '花園'],
-        ['season', '季節'], ['forest', '森林'], ['awake', '醒著的'],
-        ['asleep', '睡著的'], ['world', '世界']
+        ['people', '人們']
+      ]
+    },
+    l3: {
+      name: 'L3 季節',
+      words: [
+        ['spring', '春天'], ['summer', '夏天'], ['fall', '秋天'],
+        ['winter', '冬天'], ['garden', '花園'], ['season', '季節'],
+        ['forest', '森林'], ['awake', '清醒的'], ['asleep', '睡著的'],
+        ['world', '世界']
+      ]
+    },
+    l4: {
+      name: 'L4 運動',
+      words: [
+        ['read comics', '看漫畫書'], ['skateboard', '滑板'],
+        ['gymnastics', '體操'], ['chess', '棋子'], ['basketball', '籃球'],
+        ['photos', '照片'], ['volleyball', '排球'], ['tennis', '網球'],
+        ['weekend', '周末'], ['pictures', '圖片']
+      ]
+    },
+    l5: {
+      name: 'L5 嗜好・樂器',
+      words: [
+        ['hobbies', '嗜好'], ['popular', '受歡迎的'], ['country', '國家'],
+        ['computer', '電腦'], ['sports', '運動'], ['guitar', '吉他'],
+        ['piano', '鋼琴'], ['music', '音樂'], ['dance', '跳舞'],
+        ['painting', '畫畫']
+      ]
+    },
+    l6: {
+      name: 'L6 電器・形容',
+      words: [
+        ['computer', '電腦'], ['DVD/CD/MP3 player', '數位播放器', 'DVD, CD, MP3 player'],
+        ['camera', '相機'], ['turn on', '打開'], ['turn off', '關掉'],
+        ['boring', '無聊的'], ['project', '方案'], ['broken', '壞掉的'],
+        ['space', '空間'], ['please', '請求']
+      ]
+    },
+    l7: {
+      name: 'L7 收藏品',
+      words: [
+        ['stickers', '貼紙'], ['posters', '海報'], ['comics', '漫畫'],
+        ['postcards', '明信片'], ['pins', '大頭針'], ['shells', '貝殼'],
+        ['friends', '朋友'], ['pictures', '照片'], ['favorite', '最喜愛的'],
+        ['cool', '冷的']
+      ]
+    },
+    l8: {
+      name: 'L8 水上運動',
+      words: [
+        ['swim', '游泳'], ['sail', '划船'], ['dive', '潛水'], ['surf', '衝浪'],
+        ['kayak', '獨木舟'], ['windsurf', '風帆衝浪'], ['snorkel', '水下呼吸器'],
+        ['waterski', '滑水運動'], ['standing', '站立'], ['falling', '下墜']
       ]
     }
   };
-  LISTS.all = { name: '全部 35 字', words: LISTS.l1.words.concat(LISTS.l23.words) };
+  (function () {
+    var seen = {}, all = [];
+    ['l1','l2','l3','l4','l5','l6','l7','l8'].forEach(function (k) {
+      LISTS[k].words.forEach(function (w) {
+        if (!seen[w[0]]) { seen[w[0]] = 1; all.push(w); }
+      });
+    });
+    LISTS.all = { name: '期中考全部', words: all };
+  })();
 
   var state = {
-    list: 'l23', order: 'book', reps: 2, gap: 8, rate: 0.85,
+    list: 'all', order: 'book', reps: 2, gap: 8, rate: 0.85, count: 20,
     idx: 0, run: 0, playing: false, paused: false, used: []
   };
 
@@ -351,6 +416,7 @@
     chipGroup(el, function (v) { state.list = v; resetStage(); buildGrid(); });
   })();
   chipGroup($('orderChips'), function (v) { state.order = v; resetStage(); });
+  chipGroup($('countChips'), function (v) { state.count = +v; resetStage(); });
   chipGroup($('repChips'), function (v) { state.reps = +v; });
   chipGroup($('gapChips'), function (v) { state.gap = +v; });
   chipGroup($('rateChips'), function (v) { state.rate = +v; });
@@ -416,6 +482,7 @@
         var t = w[i]; w[i] = w[j]; w[j] = t;
       }
     }
+    if (state.count > 0) w = w.slice(0, state.count);
     return w;
   }
   function updateHead() {
@@ -439,7 +506,8 @@
                 : speak('Number ' + (state.idx + 1), 'en-US', 0.9));
       for (var r = 0; r < state.reps; r++) {
         if (state.run !== run) return;
-        await speak(state.used[state.idx][0], 'en-US', state.rate);
+        var cw = state.used[state.idx];
+        await speak(cw[2] || cw[0], 'en-US', state.rate);
         if (r < state.reps - 1) await sleepCheck(900, run, true);
       }
       if (state.run !== run) return;
@@ -478,7 +546,9 @@
     cancelSpeech();
     state.playing = false; state.paused = false; state.idx = 0; state.used = [];
     stageEls.big.textContent = '準備好了嗎?';
-    stageEls.sub.textContent = '共 ' + LISTS[state.list].words.length + ' 題';
+    var n = LISTS[state.list].words.length;
+    if (state.count > 0 && state.count < n) n = state.count;
+    stageEls.sub.textContent = '共 ' + n + ' 題(' + LISTS[state.list].name + ')';
     stageEls.status.textContent = '按下開始,會先唸題號,再唸單字';
     stageEls.main.textContent = '▶ 開始聽寫';
     stageEls.ctrls.classList.add('hide');
@@ -528,7 +598,7 @@
       b.className = 'wordcard';
       b.innerHTML = '<span class="spk">🔊</span><span class="school">' + w[0] + '</span>' +
                     (zhShown ? '<small>' + w[1] + '</small>' : '');
-      b.addEventListener('click', function () { speak(w[0], 'en-US', state.rate); });
+      b.addEventListener('click', function () { speak(w[2] || w[0], 'en-US', state.rate); });
       g.appendChild(b);
     });
   }
