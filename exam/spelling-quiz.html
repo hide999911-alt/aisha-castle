@@ -447,14 +447,28 @@
   function speak(text, lang, rate) {
     return new Promise(function (res) {
       if (!window.speechSynthesis) return res();
+      var done = false, started = false, iv = null, tm = null;
+      function finish() {
+        if (done) return;
+        done = true;
+        if (iv) clearInterval(iv);
+        if (tm) clearTimeout(tm);
+        res();
+      }
+      try { speechSynthesis.resume(); } catch (e) {}
       var u = new SpeechSynthesisUtterance(text);
       u.lang = lang;
       var v = pickVoice(lang);
       if (v) u.voice = v;
       u.rate = rate || 1;
-      u.onend = res;
-      u.onerror = function () { res(); };
+      u.onend = finish;
+      u.onerror = finish;
       speechSynthesis.speak(u);
+      iv = setInterval(function () {
+        if (speechSynthesis.speaking || speechSynthesis.pending) started = true;
+        else if (started) finish();
+      }, 250);
+      tm = setTimeout(finish, 5000 + Math.ceil(text.length * 350 / (rate || 1)));
     });
   }
   function sleepCheck(ms, run, quiet) {
@@ -492,6 +506,9 @@
   async function runFrom(i) {
     var run = ++state.run;
     state.playing = true; state.paused = false;
+    cancelSpeech();
+    await new Promise(function (r) { setTimeout(r, 180); });
+    if (state.run !== run) return;
     stageEls.main.textContent = '⏸ 暫停';
     stageEls.ctrls.classList.remove('hide');
     $('practice').classList.add('hide');
