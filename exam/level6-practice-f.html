@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Homework Level 6 Lesson 4 — Practice F</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8e8e8; }
+  body {
+    font-family: 'Comic Sans MS', 'Comic Neue', 'Segoe Print', 'DejaVu Sans',
+                 'WenQuanYi Zen Hei', sans-serif;
+    color: #111;
+    font-size: 13.5pt;
+    line-height: 1.35;
+  }
+  @page { size: A4; margin: 0; }
+  .page {
+    width: 210mm; min-height: 297mm;
+    padding: 13mm 15mm 12mm 15mm;
+    margin: 0 auto 8mm auto;
+    background: #fff;
+    page-break-after: always;
+  }
+  @media print {
+    html, body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+  @media screen {
+    .page { box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+  }
+
+  /* ---------- header ---------- */
+  .hdr { display: flex; align-items: flex-start; gap: 6mm; }
+  .hdr .logo { flex: 0 0 auto; }
+  .hdr .who { flex: 1 1 auto; }
+  .whorow { display: flex; align-items: flex-end; gap: 3mm; margin-bottom: 4.5mm; }
+  .whorow .lbl { font-weight: bold; white-space: nowrap; }
+  .fill-line { flex: 1 1 auto; border-bottom: 0.5mm dashed #666; height: 7mm; }
+  .scorebox {
+    flex: 0 0 auto; width: 34mm; height: 20mm;
+    border: 0.7mm solid #000; border-radius: 3mm;
+  }
+  .title { text-align: center; font-weight: bold; font-size: 16pt; margin: 2.5mm 0 1mm 0; }
+  .subtitle { text-align: center; font-size: 12pt; margin-bottom: 3.5mm; }
+
+  /* ---------- sections ---------- */
+  .sec { margin-top: 4mm; }
+  .seclbl { font-weight: bold; }
+  .inst { font-weight: bold; }
+
+  /* time words table */
+  table.tw { border-collapse: collapse; margin: 2mm auto 0 auto; width: 92%; }
+  table.tw td { border: 0.45mm solid #000; padding: 1.4mm 3mm; }
+  table.tw td.k { width: 18mm; font-weight: bold; text-align: center; }
+  .twcap { text-align: center; font-weight: bold; margin-top: 2mm; }
+
+  /* example box */
+  .exbox {
+    border: 1.1mm double #000; outline: 0.45mm solid #000; outline-offset: -2.2mm;
+    padding: 3.5mm 5mm 3mm 5mm; margin-top: 2.5mm;
+  }
+  .exbox .extitle { font-weight: bold; }
+  .exlist { margin-top: 1mm; font-size: 12pt; }
+  .exlist > div { margin-top: 1.6mm; }
+  .exlist .ans { padding-left: 7mm; }
+  u { text-decoration-thickness: 0.5mm; text-underline-offset: 1mm; }
+
+  /* vocabulary table */
+  table.voc { border-collapse: collapse; margin: 2mm auto 0 auto; width: 100%; }
+  table.voc td { border: 0.45mm solid #000; padding: 1.7mm 2mm; text-align: center; width: 20%; }
+
+  /* questions + writing guides */
+  .q { margin-top: 3.6mm; }
+  .q .qt { display: flex; gap: 2.5mm; font-weight: bold; }
+  .q .qn { flex: 0 0 auto; }
+  .wl {
+    position: relative; height: 12.5mm; margin-top: 2.6mm;
+    border-top: 0.5mm solid #333; border-bottom: 0.5mm solid #333;
+  }
+  .wl::before {
+    content: ""; position: absolute; top: 50%; left: 0; right: 0;
+    border-top: 0.4mm dashed #9a9a9a;
+  }
+  .nb { white-space: nowrap; }
+
+  /* answer key */
+  .key h2 { text-align: center; font-size: 15pt; margin-bottom: 1mm; }
+  .keynote { text-align: center; font-size: 10.5pt; color: #333; margin-bottom: 3.5mm; }
+  .key ol { margin-left: 8mm; }
+  .key li { margin-top: 2mm; }
+  .vary { color: #555; font-size: 10.5pt; }
+  .keysec { font-weight: bold; margin-top: 3.5mm; }
+  .keybox { border: 0.45mm solid #000; border-radius: 2mm; padding: 3mm 4mm; margin-top: 3.5mm; font-size: 11pt; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="hdr">
+    <div class="logo">
+      <svg width="64" height="72" viewBox="0 0 64 72" aria-hidden="true">
+        <path d="M32 2 L60 10 V38 C60 54 47 66 32 70 C17 66 4 54 4 38 V10 Z"
+              fill="none" stroke="#000" stroke-width="3"/>
+        <path d="M32 14 l5.2 10.6 11.7 1.7 -8.5 8.2 2 11.6 L32 40.6 21.6 46.1 l2 -11.6 -8.5 -8.2 11.7 -1.7 Z"
+              fill="#000"/>
+        <text x="32" y="62" text-anchor="middle" font-size="9" font-weight="bold" font-family="inherit">ENGLISH</text>
+      </svg>
+    </div>
+    <div class="who">
+      <div class="whorow"><span class="lbl">Name:</span><span class="fill-line"></span></div>
+      <div class="whorow"><span class="lbl">Date:</span><span class="fill-line"></span></div>
+    </div>
+    <div class="scorebox"></div>
+  </div>
+
+  <div class="title">Homework&nbsp; Level 6&nbsp; Lesson 4</div>
+  <div class="subtitle">( Practice F )</div>
+
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Lesson:</span>&nbsp;
+    Simple Past Tense: ( was / were ) ( prepositions and adjective )
+  </div>
+
+  <div class="twcap">Past Tense Time Words</div>
+  <table class="tw">
+    <tr><td class="k">New:</td><td>yesterday</td></tr>
+    <tr><td class="k">last</td><td>night / last Monday / last week / last year</td></tr>
+    <tr><td class="k">ago</td><td>two days ago / three weeks ago / four years ago / five minutes ago</td></tr>
+  </table>
+
+  <div class="exbox">
+    <div class="extitle">Example:</div>
+    <div class="exlist">
+      <div>A)&nbsp; <u>Tim and Rosy</u> are at school now. <span class="nb">( yesterday )</span>
+        <div class="ans"><u>They</u> <u>were</u> at school <u>yesterday</u>.</div>
+      </div>
+      <div>B)&nbsp; Were <u>the birds</u> in the tree ten minutes ago? <span class="nb">( Yes )</span>
+        <div class="ans">Yes, <u>they</u> were in the tree ten minutes ago.</div>
+      </div>
+      <div>C)&nbsp; Were <u>you and your friend</u> angry in class yesterday? <span class="nb">( No )</span>
+        <div class="ans">No, <u>we</u> weren't angry in class yesterday.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Unit 2:&nbsp; My Weekend&nbsp; —&nbsp; Vocabulary List:</span>
+    <table class="voc">
+      <tr><td>read comics</td><td>skateboard</td><td>gymnastics</td><td>chess</td><td>basketball</td></tr>
+      <tr><td>photos</td><td>volleyball</td><td>tennis</td><td>weekend</td><td>pictures</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the past tense sentence.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>Rosy and Lillian are at the tennis game now. <span class="nb">( two days ago )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>You and your brother are hungry at home. <span class="nb">( last night )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>Were the boys at the volleyball game last Saturday? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>Were you and your friend in the classroom two hours ago? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>Were Billy and Rosy worried about the test yesterday? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">6.</span><span>Were your mother and father in the kitchen five minutes ago? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Homework:</span>&nbsp;
+    <span class="inst">Write the question.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">7.</span><span>No, we weren't happy at the chess game last week. <span class="nb">( x - we )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">8.</span><span>Yes, they were in the garden one hour ago. <span class="nb">( x - they )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="seclbl">Level 5 Review:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">9.</span><span>Do you and your sister take photos at the park? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">10.</span><span>Do the teachers play basketball on Fridays? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Family and Friends:&nbsp; Unit 2:</span>&nbsp;
+    <span class="inst">Answer the questions in complete sentences.</span>
+
+    <div class="q">
+      <div class="qt"><span class="qn">1.</span><span>Do you like playing basketball?</span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">2.</span><span>Does your dad like playing chess? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">3.</span><span>Do the girls like reading comic books? <span class="nb">( Yes )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">4.</span><span>Do the boys like riding skateboards? <span class="nb">( No )</span></span></div>
+      <div class="wl"></div>
+    </div>
+
+    <div class="q">
+      <div class="qt"><span class="qn">5.</span><span>What does your grandfather like doing? <span class="nb">( watch TV )</span></span></div>
+      <div class="wl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 4: CORRECTIONS ================= -->
+<div class="page">
+  <div class="sec" style="margin-top:0">
+    <span class="seclbl">Corrections:</span>
+    <div class="wl"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+    <div class="wl" style="margin-top:5mm"></div>
+  </div>
+</div>
+
+<!-- ================= PAGE 5: ANSWER KEY ================= -->
+<div class="page key">
+  <h2>Answer Key 完整參考答案 — Practice F</h2>
+  <div class="keynote">家長／老師批改用 — 標「依實際情況」的題目,孩子照真實情況寫即可,句型對就給分。</div>
+
+  <div class="keysec">Homework: Write the past tense sentence.</div>
+  <ol>
+    <li value="1"><u>They</u> <u>were</u> at the tennis game <u>two days ago</u>. <span class="vary">(Rosy and Lillian were... 亦可)</span></li>
+    <li value="2">You and your brother <u>were</u> hungry at home <u>last night</u>. <span class="vary">(We were hungry at home last night. 亦可)</span></li>
+  </ol>
+
+  <div class="keysec">Homework: Answer the questions in complete sentences.</div>
+  <ol>
+    <li value="3">Yes, they were at the volleyball game last Saturday. <span class="vary">(the boys → they)</span></li>
+    <li value="4">No, we weren't in the classroom two hours ago. <span class="vary">(you and your friend → we)</span></li>
+    <li value="5">Yes, they were worried about the test yesterday. <span class="vary">(Billy and Rosy → they)</span></li>
+    <li value="6">No, they weren't in the kitchen five minutes ago. <span class="vary">(mother and father → they)</span></li>
+  </ol>
+
+  <div class="keysec">Homework: Write the question.</div>
+  <ol>
+    <li value="7">Were you and Ian happy at the chess game last week? ( No ) <span class="vary">(x - we → you and Ian)</span></li>
+    <li value="8">Were Pata and Daniel in the garden one hour ago? ( Yes ) <span class="vary">(x - they → Pata and Daniel)</span></li>
+  </ol>
+
+  <div class="keysec">Level 5 Review</div>
+  <ol>
+    <li value="9">No, we don't take photos at the park.</li>
+    <li value="10">Yes, they play basketball on Fridays.</li>
+  </ol>
+
+  <div class="keysec">Family and Friends: Unit 2</div>
+  <ol>
+    <li value="1">Yes, I like playing basketball. / No, I don't like playing basketball. <span class="vary">(依實際情況)</span></li>
+    <li value="2">No, he doesn't like playing chess. <span class="vary">(三單否定 doesn't like + ing)</span></li>
+    <li value="3">Yes, they like reading comic books.</li>
+    <li value="4">No, they don't like riding skateboards.</li>
+    <li value="5">He likes watch<u>ing</u> TV. <span class="vary">(watch TV 型:動詞改 ing)</span></li>
+  </ol>
+
+  <div class="keybox">
+    <b>批改重點 Grading focus:</b>
+    ① 複數主詞(Tim and Rosy / the girls / you and...)過去式用 were,否定 weren't
+    ② 回答時主詞要替換:the girls → they;you and your friend → we
+    ③ 寫問句:( x - we ) 換成 you and Ian、( x - they ) 換成 Pata and Daniel,句尾問號 + ( Yes / No )
+    ④ like + 動詞ing(like playing / doing / taking / reading),三單用 likes
+    ⑤ 寫錯的句子抄到 Corrections 區訂正一次。
+  </div>
+</div>
+
+</body>
+</html>
